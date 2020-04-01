@@ -5,6 +5,10 @@
 yarn install
 ```
 
+### Configurations
+
+- edit .env.development & .env.production
+
 ### Compiles and hot-reloads for development
 ```
 yarn serve
