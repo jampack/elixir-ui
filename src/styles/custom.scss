@@ -1,0 +1,14 @@
+.full-wh{
+  width: 100%;
+  height: 100%;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+// todo: use color variable to maintain standard
+.clickable:hover{
+  color: #0000FF;
+  cursor: pointer;
+}

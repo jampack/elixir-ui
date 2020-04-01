@@ -19,3 +19,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+/src/styles/.sass-cache/*
+/src/styles/*.map
+/src/styles/*.css
