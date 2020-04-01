@@ -1,4 +1,4 @@
-# ui
+# Elixir-UI
 
 ## Project setup
 ```
