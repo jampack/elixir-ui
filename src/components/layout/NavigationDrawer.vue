@@ -3,9 +3,9 @@
     v-model="drawer"
     :clipped="$vuetify.breakpoint.lgAndUp"
     app>
-    <v-list-item two-line :class="miniVariant && 'px-0'">
+    <v-list-item two-line>
       <v-list-item-avatar tile>
-        <img src="https://randomuser.me/api/portraits/men/81.jpg">
+        <img alt="user" src="https://randomuser.me/api/portraits/men/81.jpg">
       </v-list-item-avatar>
 
       <v-list-item-content>
@@ -80,7 +80,7 @@ export default {
         text: 'Planning',
         model: false,
         children: [
-          { icon: 'mdi-plus', text: 'Project planning', url: { name: 'users-index' } },
+          { icon: 'mdi-plus', text: 'projects planning', url: { name: 'users-index' } },
           { icon: 'mdi-plus', text: 'Employee planning', url: { name: 'users-index' } },
         ],
       },

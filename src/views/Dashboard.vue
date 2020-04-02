@@ -71,22 +71,22 @@ export default {
         name: 'Resources',
         colorByPoint: true,
         data: [{
-          name: 'Project 1',
+          name: 'projects 1',
           y: 61.41,
         }, {
-          name: 'Project 2',
+          name: 'projects 2',
           y: 11.84,
         }, {
-          name: 'Project 3',
+          name: 'projects 3',
           y: 10.85,
         }, {
-          name: 'Project 4',
+          name: 'projects 4',
           y: 4.67,
         }, {
-          name: 'Project 5',
+          name: 'projects 5',
           y: 4.18,
         }, {
-          name: 'Project 6',
+          name: 'projects 6',
           y: 7.05,
         }],
       }],

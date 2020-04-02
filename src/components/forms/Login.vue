@@ -4,24 +4,23 @@
       <ValidationProvider name="username" rules="required|email" v-slot="{ errors }">
         <v-text-field
           v-model="username"
+          :error-messages="errors[0]"
           label="ID"
           name="username"
           prepend-inner-icon="fas fa-user-tie"
-          type="text"
-          outlined
-          :error-messages="errors[0]"/>
+          outlined/>
       </ValidationProvider>
       <ValidationProvider name="password" rules="required" v-slot="{ errors }">
         <v-text-field
           v-model="password"
+          :append-icon="showPassword ?  'fas fa-eye-slash' : 'fas fa-eye'"
+          :type="showPassword ? 'text' : 'password'"
+          :error-messages="errors[0]"
           id="password"
           label="Password"
           name="password"
           prepend-inner-icon="fas fa-key"
           outlined
-          :append-icon="showPassword ?  'fas fa-eye-slash' : 'fas fa-eye'"
-          :type="showPassword ? 'text' : 'password'"
-          :error-messages="errors[0]"
           @click:append="showPassword = !showPassword"/>
       </ValidationProvider>
       <v-checkbox v-model="remember" label="Remember" class="mt-n2"/>
@@ -29,9 +28,9 @@
         <v-spacer />
         <v-btn
           class="mr-2 mb-1"
+          :loading="loading"
           depressed
-          @click="handleSubmit(submit)"
-          :loading="loading">
+          @click="handleSubmit(submit)">
           Login
         </v-btn>
       </v-row>
@@ -41,10 +40,10 @@
 
 <script>
 import { setAuthCookie } from '@/lib/cookies/authCookies';
-import { LoginMutation } from '@/GraphQL/Mutations/AuthMutations';
+import { LoginMutation } from '@/GraphQL/mutations/AuthMutations';
 
 export default {
-  name: 'login',
+  name: 'LoginForm',
   data: () => ({
     username: 'demo@elixir.com',
     password: 'password',
@@ -65,7 +64,7 @@ export default {
           password: this.password,
         },
       }).then((response) => {
-        const { data: { login } } = response;
+        const { login } = response.data;
         setAuthCookie(login.access_token, login.refresh_token, login.expires_in, this.remember);
         window.location.reload();
       }).catch((error) => {
@@ -75,7 +74,7 @@ export default {
           const validationErrors = gqlError.extensions.validation;
           Object.keys(validationErrors).forEach((key) => {
             this.$refs.loginForm.setErrors({
-              key: validationErrors[key][0],
+              [key]: validationErrors[key][0],
             });
           });
         } else if (gqlError.extensions.category === 'authentication') {
