@@ -1,38 +1,46 @@
 <template>
   <ValidationObserver ref="loginForm" v-slot="{ handleSubmit }">
     <v-form>
-      <ValidationProvider name="username" rules="required|email" v-slot="{ errors }">
-        <v-text-field
-          v-model="username"
-          :error-messages="errors[0]"
-          label="ID"
-          name="username"
-          prepend-inner-icon="fas fa-user-tie"
-          outlined/>
-      </ValidationProvider>
-      <ValidationProvider name="password" rules="required" v-slot="{ errors }">
-        <v-text-field
-          v-model="password"
-          :append-icon="showPassword ?  'fas fa-eye-slash' : 'fas fa-eye'"
-          :type="showPassword ? 'text' : 'password'"
-          :error-messages="errors[0]"
-          id="password"
-          label="Password"
-          name="password"
-          prepend-inner-icon="fas fa-key"
-          outlined
-          @click:append="showPassword = !showPassword"/>
-      </ValidationProvider>
-      <v-checkbox v-model="remember" label="Remember" class="mt-n2"/>
       <v-row>
-        <v-spacer />
-        <v-btn
-          class="mr-2 mb-1"
-          :loading="loading"
-          depressed
-          @click="handleSubmit(submit)">
-          Login
-        </v-btn>
+        <v-col cols="12" sm="12" md="12">
+          <ValidationProvider name="username" rules="required|email" v-slot="{ errors }">
+            <v-text-field
+              v-model="username"
+              :error-messages="errors[0]"
+              label="ID"
+              name="username"
+              prepend-inner-icon="fas fa-user-tie"
+              outlined/>
+          </ValidationProvider>
+        </v-col>
+        <v-col cols="12" sm="12" md="12">
+          <ValidationProvider name="password" rules="required" v-slot="{ errors }">
+            <v-text-field
+              v-model="password"
+              :append-icon="showPassword ?  'fas fa-eye-slash' : 'fas fa-eye'"
+              :type="showPassword ? 'text' : 'password'"
+              :error-messages="errors[0]"
+              id="password"
+              label="Password"
+              name="password"
+              prepend-inner-icon="fas fa-key"
+              outlined
+              @click:append="showPassword = !showPassword"/>
+          </ValidationProvider>
+        </v-col>
+        <v-col cols="12" sm="12" md="12">
+          <v-row class="no-gutters">
+            <v-checkbox v-model="remember" label="Remember" class="mt-n2"/>
+            <v-spacer />
+            <v-btn
+              class="mr-2 mt-n3"
+              :loading="loading"
+              depressed
+              @click="handleSubmit(submit)">
+              Login
+            </v-btn>
+          </v-row>
+        </v-col>
       </v-row>
     </v-form>
   </ValidationObserver>

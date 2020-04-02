@@ -23,8 +23,8 @@
 
 <script>
 import PageTitle from '@/components/core/PageTitle.vue';
-import CreateProjectDialog from '@/components/dialogs/projects/Create.vue';
-import ProjectsOverviewTable from '@/components/tables/projects/Overview.vue';
+import CreateProjectDialog from '@/components/dialogs/project/Create.vue';
+import ProjectsOverviewTable from '@/components/tables/project/Overview.vue';
 
 export default {
   name: 'index',

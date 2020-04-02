@@ -15,7 +15,7 @@
 
 <script>
 import ModalControlMixin from '@/mixins/ModalControl';
-import CreateProjectForm from '@/components/forms/projects/Create.vue';
+import CreateProjectForm from '@/components/forms/project/Create.vue';
 
 export default {
   name: 'CreateProjectDialog',

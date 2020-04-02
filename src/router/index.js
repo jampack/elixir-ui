@@ -16,9 +16,9 @@ const routes = [
     component: Dashboard,
   },
   {
-    path: '/projects',
-    name: 'projects-index',
-    component: () => import(/* webpackChunkName: "projects-index" */ '@/views/projects/index.vue'),
+    path: '/project',
+    name: 'project-index',
+    component: () => import(/* webpackChunkName: "project-index" */ '@/views/projects/index.vue'),
   },
   {
     path: '/users',
