@@ -12,7 +12,7 @@
               <v-toolbar-title>Users overview</v-toolbar-title>
             </v-toolbar>
             <v-divider />
-            <projects-overview-table />
+            <users-overview-table />
           </v-card>
         </v-col>
       </v-row>
@@ -24,14 +24,14 @@
 <script>
 import PageTitle from '@/components/core/PageTitle.vue';
 import CreateUserDialog from '@/components/dialogs/user/Create.vue';
-import ProjectsOverviewTable from '@/components/tables/project/Overview.vue';
+import UsersOverviewTable from '@/components/tables/user/Overview.vue';
 
 export default {
   name: 'index',
   components: {
     'page-title': PageTitle,
     'create-user-dialog': CreateUserDialog,
-    'projects-overview-table': ProjectsOverviewTable,
+    'users-overview-table': UsersOverviewTable,
   },
   data: () => ({
     createUserDialog: false,

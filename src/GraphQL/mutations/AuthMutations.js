@@ -24,8 +24,8 @@ export const LogoutMutation = gql`
 `;
 
 export const RefreshTokenMutation = gql`
-  mutation RefreshTokenMutation($refresh_token: String!){
-    refreshToken(data: {refresh_token: $refresh_token}) {
+  mutation RefreshTokenMutation($refreshToken: String!){
+    refreshToken(data: {refresh_token: $refreshToken}) {
       access_token
       refresh_token
       expires_in

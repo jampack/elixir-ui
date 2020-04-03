@@ -1,12 +1,12 @@
 <template>
   <ApolloQuery
-    :query="queries.projects"
-    :variables="{ statusOrder: 'ASC', updatedAtOrder: 'ASC' }">
-    <template v-slot="{ result: { loading, data }}">
+    :query="queries.users"
+    :variables="{ nameOrder: 'ASC', roleOrder: 'ASC' }">
+    <template v-slot="{ result: { loading, data } }">
       <v-data-table
         class="elevation-1"
         :headers="headers"
-        :items="data.projects.data"
+        :items="data.users.data"
         :items-per-page="5"
         :loading="loading"
         fixed-header>
@@ -14,17 +14,31 @@
         <template v-slot:item.name="{ item }">
           <span
             class="clickable font-weight-medium"
-            @click="$router.push(`/project/${item.slug}`)">
+            @click="$router.push(`/user/${item.id}`)">
             {{item.name}}
           </span>
         </template>
 
-        <template v-slot:item.status="{item}">
-          <span>{{item.status.name}}</span>
+        <template v-slot:item.status="{ item }">
+          <v-chip
+            v-if="item.status === 'ACTIVE'"
+            small
+            color="green"
+            text-color="white">
+            <span>Active</span>
+          </v-chip>
         </template>
 
-        <template v-slot:item.assignees="{item}">
-          <span>{{item.users.paginatorInfo.total}}</span>
+        <template v-slot:item.role="{ item }">
+          <span class="text-capitalize">{{item.role.toLowerCase()}}</span>
+        </template>
+
+        <template v-slot:item.projects="{ item }">
+          <span class="text-capitalize">{{item.projects.paginatorInfo.total}}</span>
+        </template>
+
+        <template v-slot:item.teams="{ item }">
+          <span class="text-capitalize">{{item.teams.paginatorInfo.total}}</span>
         </template>
 
         <template v-slot:item.action="{item}">
@@ -35,13 +49,12 @@
               </v-btn>
             </template>
             <v-list dense>
-              <v-list-item :to="`/project/${item.slug}`">
+              <v-list-item :to="`/user/${item.id}`">
                 <v-icon left small>fas fa-eye</v-icon> View
               </v-list-item>
               <v-list-item link>
                 <v-icon left small>fas fa-pen</v-icon> Edit
               </v-list-item>
-              <v-list-item link><v-icon left small>fas fa-cog</v-icon> Settings</v-list-item>
             </v-list>
           </v-menu>
         </template>
@@ -52,19 +65,20 @@
 </template>
 
 <script>
-import { ProjectsQuery } from '@/GraphQL/queries/ProjectQueries';
+import { UsersQuery } from '@/GraphQL/queries/UserQueries';
 
 export default {
   name: 'Overview',
   data: () => ({
     queries: {
-      projects: ProjectsQuery,
+      users: UsersQuery,
     },
     headers: [
       { text: 'Name', value: 'name', align: 'start' },
       { text: 'Status', value: 'status', align: 'center' },
-      { text: 'Assignees', value: 'assignees', align: 'center' },
-      // { text: 'Notes', value: 'carbs', align: 'center' },
+      { text: 'Role', value: 'role', align: 'center' },
+      { text: 'Projects', value: 'projects', align: 'center' },
+      { text: 'Teams', value: 'teams', align: 'center' },
       {
         text: 'Action',
         value: 'action',

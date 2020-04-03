@@ -52,7 +52,7 @@ export default {
   data: () => ({
     name: '',
     email: '',
-    role: '',
+    role: 'DEVELOPER',
     loading: false,
     inputRole: [
       { name: 'Administrator', value: 'ADMINISTRATOR' },

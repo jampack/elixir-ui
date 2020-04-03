@@ -22,3 +22,7 @@ yarn-error.log*
 /src/styles/.sass-cache/*
 /src/styles/*.map
 /src/styles/*.css
+
+# editor plugins meta
+.graphqlconfig
+schema.graphql

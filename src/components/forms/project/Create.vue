@@ -26,8 +26,8 @@
         <v-col cols="12" sm="12" md="12">
           <ValidationProvider name="description" rules="" v-slot="{ errors }">
             <ApolloQuery
-              :query="queries.projectStatusQuery">
-              <template v-slot="{ result: { loading, error, data }}">
+              :query="queries.projectStatuses">
+              <template v-slot="{ result: { loading, data }}">
                 <v-select
                   v-model="status"
                   :items="data.projectStatuses"
@@ -61,7 +61,7 @@ export default {
   name: 'CreateProjectForm',
   data: () => ({
     queries: {
-      projectStatusQuery: ProjectStatusQuery,
+      projectStatuses: ProjectStatusQuery,
     },
     name: '',
     description: '',
@@ -76,7 +76,7 @@ export default {
         variables: {
           name: this.name,
           description: this.description,
-          status_id: this.status,
+          statusId: this.status,
         },
       }).then(({ data }, response) => {
         const { createProject: { id } } = data;
