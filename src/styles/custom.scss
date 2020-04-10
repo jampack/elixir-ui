@@ -3,6 +3,10 @@
   height: 100%;
 }
 
+.full-width{
+  width: 100%;
+}
+
 .cursor-pointer{
   cursor: pointer;
 }
@@ -11,4 +15,9 @@
 .clickable:hover{
   color: #0000FF;
   cursor: pointer;
+}
+
+.select-none{
+  -webkit-user-select:none;-moz-user-select:-moz-none;
+  -ms-user-select:none;user-select:none
 }

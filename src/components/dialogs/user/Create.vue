@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :value="value" persistent max-width="600px">
+  <v-dialog :value="value"  max-width="600px" persistent>
     <v-card>
       <v-toolbar flat>
         <v-toolbar-title>Create User</v-toolbar-title>

@@ -25,6 +25,11 @@ const routes = [
     name: 'users-index',
     component: () => import(/* webpackChunkName: "users-index" */ '@/views/users/index.vue'),
   },
+  {
+    path: '/settings',
+    name: 'settings-index',
+    component: () => import(/* webpackChunkName: "settings-index" */ '@/views/settings/index.vue'),
+  },
 ];
 
 const router = new VueRouter({

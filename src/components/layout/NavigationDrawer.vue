@@ -90,14 +90,14 @@ export default {
         text: 'Management',
         model: false,
         children: [
-          { icon: 'mdi-plus', text: 'Import', url: { name: 'users-index' } },
+          { icon: 'mdi-plus', text: 'Attendance', url: { name: 'users-index' } },
           { icon: 'mdi-plus', text: 'Export', url: { name: 'users-index' } },
           { icon: 'mdi-plus', text: 'Print', url: { name: 'users-index' } },
           { icon: 'mdi-plus', text: 'Undo changes', url: { name: 'users-index' } },
           { icon: 'mdi-plus', text: 'Other contacts', url: { name: 'users-index' } },
         ],
       },
-      { icon: 'fas fa-cog', text: 'Setting', url: { name: 'users-index' } },
+      { icon: 'fas fa-cog', text: 'Setting', url: { name: 'settings-index' } },
     ],
   }),
   computed: {
