@@ -1,14 +1,17 @@
 <template>
   <ApolloQuery
     :query="queries.projects"
-    :variables="{ statusOrder: 'ASC', updatedAtOrder: 'ASC' }">
+    :variables="{ statusOrder: 'ASC', updatedAtOrder: 'ASC' }"
+    ref="projectsQuery"
+    notifyOnNetworkStatusChange>
     <template v-slot="{ result: { loading, data }}">
+      <table-skeleton-loader v-if="loading"/>
       <v-data-table
+        v-else
         class="elevation-1"
         :headers="headers"
         :items="data.projects.data"
         :items-per-page="5"
-        :loading="loading"
         fixed-header>
 
         <template v-slot:item.name="{ item }">
@@ -53,9 +56,14 @@
 
 <script>
 import { ProjectsQuery } from '@/GraphQL/queries/ProjectQueries';
+import TableSkeletonLoader from '@/components/core/skeletons/Table.vue';
+import events from '@/constants/events';
 
 export default {
   name: 'Overview',
+  components: {
+    'table-skeleton-loader': TableSkeletonLoader,
+  },
   data: () => ({
     queries: {
       projects: ProjectsQuery,
@@ -73,6 +81,11 @@ export default {
       },
     ],
   }),
+  mounted() {
+    this.$root.$on(events.PROJECT_CREATED, () => {
+      this.$refs.projectsQuery.getApolloQuery().refetch();
+    });
+  },
 };
 </script>
 

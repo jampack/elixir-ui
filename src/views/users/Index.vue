@@ -27,7 +27,7 @@ import CreateUserDialog from '@/components/dialogs/user/Create.vue';
 import UsersOverviewTable from '@/components/tables/user/Overview.vue';
 
 export default {
-  name: 'index',
+  name: 'Index',
   components: {
     'page-title': PageTitle,
     'create-user-dialog': CreateUserDialog,

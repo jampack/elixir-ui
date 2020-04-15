@@ -18,17 +18,27 @@ const routes = [
   {
     path: '/project',
     name: 'project-index',
-    component: () => import(/* webpackChunkName: "project-index" */ '@/views/projects/index.vue'),
+    component: () => import(/* webpackChunkName: "project-index" */ '@/views/projects/Index.vue'),
+  },
+  {
+    path: '/project/:slug',
+    name: 'project-view',
+    component: () => import(/* webpackChunkName: "project-view" */ '@/views/projects/ViewProject.vue'),
   },
   {
     path: '/users',
     name: 'users-index',
-    component: () => import(/* webpackChunkName: "users-index" */ '@/views/users/index.vue'),
+    component: () => import(/* webpackChunkName: "users-index" */ '@/views/users/Index.vue'),
   },
   {
     path: '/settings',
     name: 'settings-index',
-    component: () => import(/* webpackChunkName: "settings-index" */ '@/views/settings/index.vue'),
+    component: () => import(/* webpackChunkName: "settings-index" */ '@/views/settings/Index.vue'),
+  },
+  {
+    path: '*',
+    name: '404',
+    component: () => import(/* webpackChunkName: "404" */ '@/views/errors/404.vue'),
   },
 ];
 

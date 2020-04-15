@@ -70,7 +70,7 @@ import PageTitle from '@/components/core/PageTitle.vue';
 import AttendanceCard from '@/components/page/settings/Attendance.vue';
 
 export default {
-  name: 'index',
+  name: 'Index',
   components: {
     'page-title': PageTitle,
     'attendance-card': AttendanceCard,

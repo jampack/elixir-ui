@@ -26,7 +26,8 @@
         <v-col cols="12" sm="12" md="12">
           <ValidationProvider name="description" rules="" v-slot="{ errors }">
             <ApolloQuery
-              :query="queries.projectStatuses">
+              :query="queries.projectStatuses"
+              notifyOnNetworkStatusChange>
               <template v-slot="{ result: { loading, data }}">
                 <v-select
                   v-model="status"
@@ -56,9 +57,12 @@
 <script>
 import { ProjectStatusQuery } from '@/GraphQL/queries/ProjectStatusQueries';
 import { CreateProjectMutation } from '@/GraphQL/mutations/ProjectMutations';
+import EmitEvent from '@/mixins/EmitEvent';
+import events from '@/constants/events';
 
 export default {
   name: 'CreateProjectForm',
+  mixins: [EmitEvent],
   data: () => ({
     queries: {
       projectStatuses: ProjectStatusQuery,
@@ -81,7 +85,7 @@ export default {
       }).then(({ data }, response) => {
         const { createProject: { id } } = data;
         if (id) {
-          this.$emit('success');
+          this.emitEvent(events.PROJECT_CREATED);
         } else {
           console.warn('Unexpected Result: ', response);
         }
