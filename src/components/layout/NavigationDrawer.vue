@@ -61,7 +61,7 @@
       </template>
     </v-list>
     <template v-slot:append>
-      <v-btn block depressed>Button</v-btn>
+      <v-btn block depressed @click="fetchQuote">Motivate Me</v-btn>
     </template>
   </v-navigation-drawer>
 </template>
@@ -106,6 +106,11 @@ export default {
         return this.$store.getters.GET_NAV_DRAWER;
       },
       set() {},
+    },
+  },
+  methods: {
+    fetchQuote() {
+      console.log('fetch quote');
     },
   },
 };

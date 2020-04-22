@@ -1,6 +1,6 @@
 <template>
   <div class="page-title mb-4">
-    <v-row>
+    <v-row class="mx-1">
       <span class="headline font-weight-medium text-capitalize">{{this.$props.title}}</span>
       <v-spacer />
       <div class="mb-2">

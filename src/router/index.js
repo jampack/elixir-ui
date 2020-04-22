@@ -24,6 +24,14 @@ const routes = [
     path: '/project/:slug',
     name: 'project-view',
     component: () => import(/* webpackChunkName: "project-view" */ '@/views/projects/ViewProject.vue'),
+    meta: {
+      no_pad: true,
+    },
+  },
+  {
+    path: '/board/:projectSlug',
+    name: 'project-board-view',
+    component: () => import(/* webpackChunkName: "project-board-view" */ '@/views/boards/ViewProjectBoard.vue'),
   },
   {
     path: '/users',
