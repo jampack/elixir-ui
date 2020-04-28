@@ -1,14 +1,16 @@
 <template>
   <ApolloQuery
     :query="queries.users"
-    :variables="{ nameOrder: 'ASC', roleOrder: 'ASC' }">
-    <template v-slot="{ result: { loading, data } }">
+    :variables="{ nameOrder: 'ASC', roleOrder: 'ASC' }"
+    notifyOnNetworkStatusChange>
+    <template v-slot="{ result: { loading, data }}">
+      <table-skeleton-loader v-if="loading"/>
       <v-data-table
+        v-else
         class="elevation-1"
         :headers="headers"
         :items="data.users.data"
         :items-per-page="5"
-        :loading="loading"
         fixed-header>
 
         <template v-slot:item.name="{ item }">
@@ -66,9 +68,13 @@
 
 <script>
 import { UsersQuery } from '@/GraphQL/queries/UserQueries';
+import TableSkeletonLoader from '@/components/core/skeletons/Table.vue';
 
 export default {
   name: 'Overview',
+  components: {
+    'table-skeleton-loader': TableSkeletonLoader,
+  },
   data: () => ({
     queries: {
       users: UsersQuery,

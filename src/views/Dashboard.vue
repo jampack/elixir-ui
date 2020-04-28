@@ -5,7 +5,7 @@
         <v-btn depressed icon><v-icon>fas fa-sync</v-icon></v-btn>
       </page-title>
 
-      <v-row>
+      <v-row style="margin-top: 25px">
         <v-card class="full-wh" outlined shaped>
           <v-card-text>
             <v-row>

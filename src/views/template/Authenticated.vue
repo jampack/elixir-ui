@@ -3,7 +3,12 @@
     <NavigationDrawer />
     <TopBar />
     <v-content>
-      <v-container>
+      <v-container
+        fluid
+        :class="{
+        'ma-0': $route.meta.no_pad || $vuetify.breakpoint.smAndDown,
+        'pa-0': $route.meta.no_pad || $vuetify.breakpoint.smAndDown
+        }">
         <router-view></router-view>
       </v-container>
     </v-content>

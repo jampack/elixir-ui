@@ -1,9 +1,12 @@
 <template>
   <ApolloQuery
-    :query="queries.attendanceSchemes">
+    :query="queries.attendanceSchemes"
+    notifyOnNetworkStatusChange>
     <template v-slot="{ result: { loading, data }}">
       <v-card outlined>
+        <table-skeleton-loader v-if="loading"/>
         <v-data-table
+          v-else
           class="elevation-1"
           :headers="headers"
           :items="data.attendanceSchemes.data"
@@ -35,9 +38,13 @@
 
 <script>
 import { AttendanceSchemesQuery } from '@/GraphQL/queries/settings/AttendanceScheme';
+import TableSkeletonLoader from '@/components/core/skeletons/Table.vue';
 
 export default {
   name: 'AttendanceSchemes',
+  components: {
+    'table-skeleton-loader': TableSkeletonLoader,
+  },
   data: () => ({
     queries: {
       attendanceSchemes: AttendanceSchemesQuery,
