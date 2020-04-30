@@ -20,8 +20,7 @@
                       class="mx-auto"
                       v-for="(element, index) in list1"
                       :key="element.name"
-                      max-width="344"
-                    >
+                      max-width="344">
                       <v-card-text>
                         <div>card {{index}}</div>
                         <p class="display-1 text--primary">

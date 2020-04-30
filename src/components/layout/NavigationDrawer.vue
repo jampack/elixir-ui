@@ -72,7 +72,7 @@ export default {
   data: () => ({
     items: [
       { icon: 'fas fa-chart-pie', text: 'Dashboard', url: { name: 'dashboard' } },
-      { icon: 'fas fa-laptop-code', text: 'Projects', url: { name: 'project-index' } },
+      { icon: 'fas fa-laptop-code', text: 'Projects', url: { name: 'projects-index' } },
       { icon: 'fas fa-users', text: 'Users', url: { name: 'users-index' } },
       {
         icon: 'fas fa-angle-up',
