@@ -24,25 +24,19 @@
           </ValidationProvider>
         </v-col>
         <v-col cols="12" sm="12" md="12">
-          <ValidationProvider name="description" rules="" v-slot="{ errors }">
-            <ApolloQuery
-              :query="queries.projectStatuses"
-              notifyOnNetworkStatusChange>
-              <template v-slot="{ result: { loading, data }}">
-                <v-select
-                  v-model="status"
-                  :items="data.projectStatuses"
-                  :error-messages="errors[0]"
-                  :loading="loading"
-                  :menu-props="{ bottom: true, offsetY: true }"
-                  item-text="name"
-                  item-value="id"
-                  label="Status"
-                  placeholder="Current status of project"
-                  outlined
-                ></v-select>
-              </template>
-            </ApolloQuery>
+          <ValidationProvider name="status_id" rules="required" v-slot="{ errors }">
+            <v-select
+              v-model="status"
+              :items="statusItems"
+              :error-messages="errors[0]"
+              :loading="$apollo.queries.statusItems.loading"
+              :menu-props="{ bottom: true, offsetY: true }"
+              item-text="name"
+              item-value="id"
+              label="Status"
+              placeholder="Current status of project"
+              outlined
+            />
           </ValidationProvider>
         </v-col>
       </v-row>
@@ -72,6 +66,15 @@ export default {
     status: '',
     loading: false,
   }),
+  apollo: {
+    statusItems: {
+      query: ProjectStatusQuery,
+      variables: {
+        first: 500,
+      },
+      update: (data) => data.projectStatuses,
+    },
+  },
   methods: {
     submit() {
       this.loading = true;
@@ -85,7 +88,9 @@ export default {
       }).then(({ data }, response) => {
         const { createProject: { id } } = data;
         if (id) {
-          this.emitEvent(events.PROJECT_CREATED);
+          this.emitGlobalEvent(events.PROJECT_CREATED);
+          this.emitEvent(events.SUCCESS);
+          console.log('emitted event');
         } else {
           console.warn('Unexpected Result: ', response);
         }
