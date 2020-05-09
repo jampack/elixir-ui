@@ -17,13 +17,13 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
         case 'authentication':
           return message === 'The user credentials were incorrect.';
         default:
-          console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
+          console.error(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
       }
       return false;
     });
   }
 
-  if (networkError) console.log(`[Network error]: ${networkError}`);
+  if (networkError) console.error(`[Network error]: ${networkError}`);
 });
 
 // HTTP connection to the API
