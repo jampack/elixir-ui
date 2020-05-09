@@ -74,7 +74,7 @@
 import { CreateAttendanceSchemeMutation } from '@/GraphQL/mutations/settings/AttendanceSchemeMutations';
 
 export default {
-  name: 'Create',
+  name: 'CreateAttendanceSchemeForm',
   data: () => ({
     name: '',
     sickLeaves: null,

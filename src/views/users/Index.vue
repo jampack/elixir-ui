@@ -23,8 +23,8 @@
 
 <script>
 import PageTitle from '@/components/core/PageTitle.vue';
-import CreateUserDialog from '@/components/dialogs/user/Create.vue';
-import UsersOverviewTable from '@/components/tables/user/Overview.vue';
+import CreateUserDialog from '@/components/dialogs/user/CreateUserDialog.vue';
+import UsersOverviewTable from '@/components/tables/user/UsersOverviewTable.vue';
 
 export default {
   name: 'Index',

@@ -60,7 +60,7 @@ import TableSkeletonLoader from '@/components/core/skeletons/Table.vue';
 import events from '@/constants/events';
 
 export default {
-  name: 'Overview',
+  name: 'ProjectsOverviewTable',
   components: {
     'table-skeleton-loader': TableSkeletonLoader,
   },

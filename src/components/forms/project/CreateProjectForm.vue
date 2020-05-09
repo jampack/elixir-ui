@@ -89,7 +89,7 @@ export default {
         const { createProject: { id } } = data;
         if (id) {
           this.emitGlobalEvent(events.PROJECT_CREATED);
-          this.emitEvent(events.SUCCESS);
+          this.emitEvent('success');
           console.log('emitted event');
         } else {
           console.warn('Unexpected Result: ', response);

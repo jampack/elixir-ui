@@ -22,8 +22,8 @@
 
 <script>
 import ModalControlMixin from '@/mixins/ModalControl';
-import AttendanceSchemesTable from '@/components/tables/settings/AttendanceSchemes.vue';
-import CreateAttendanceSchemeForm from '@/components/forms/settings/attendanceScheme/Create.vue';
+import AttendanceSchemesTable from '@/components/tables/settings/AttendanceSchemesOverviewTable.vue';
+import CreateAttendanceSchemeForm from '@/components/forms/settings/attendanceScheme/CreateAttendanceSchemeForm.vue';
 
 export default {
   name: 'ManageAttendanceDialog',

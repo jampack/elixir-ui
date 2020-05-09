@@ -15,7 +15,7 @@
 
 <script>
 import ModalControlMixin from '@/mixins/ModalControl';
-import CreateUserForm from '@/components/forms/user/Create.vue';
+import CreateUserForm from '@/components/forms/user/CreateUserForm.vue';
 
 export default {
   name: 'CreateUserDialog',

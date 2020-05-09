@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import ManageAttendanceDialog from '@/components/dialogs/settings/ManageAttendance.vue';
+import ManageAttendanceDialog from '@/components/dialogs/settings/ManageAttendanceDialog.vue';
 
 export default {
   name: 'Attendance',

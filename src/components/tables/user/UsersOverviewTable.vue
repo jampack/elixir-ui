@@ -71,7 +71,7 @@ import { UsersQuery } from '@/GraphQL/queries/UserQueries';
 import TableSkeletonLoader from '@/components/core/skeletons/Table.vue';
 
 export default {
-  name: 'Overview',
+  name: 'UsersOverviewTable',
   components: {
     'table-skeleton-loader': TableSkeletonLoader,
   },

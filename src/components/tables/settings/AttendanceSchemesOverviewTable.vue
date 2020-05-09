@@ -41,7 +41,7 @@ import { AttendanceSchemesQuery } from '@/GraphQL/queries/settings/AttendanceSch
 import TableSkeletonLoader from '@/components/core/skeletons/Table.vue';
 
 export default {
-  name: 'AttendanceSchemes',
+  name: 'AttendanceSchemesOverviewTable',
   components: {
     'table-skeleton-loader': TableSkeletonLoader,
   },
