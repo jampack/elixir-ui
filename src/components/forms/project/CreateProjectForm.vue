@@ -90,7 +90,6 @@ export default {
         if (id) {
           this.emitGlobalEvent(events.PROJECT_CREATED);
           this.emitEvent('success');
-          console.log('emitted event');
         } else {
           console.warn('Unexpected Result: ', response);
         }
