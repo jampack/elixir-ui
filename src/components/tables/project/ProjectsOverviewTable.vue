@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { ProjectsQuery } from '@/GraphQL/queries/ProjectQueries';
+import { GetProjectsQuery } from '@/GraphQL/queries/ProjectQueries';
 import TableSkeletonLoader from '@/components/core/skeletons/Table.vue';
 import events from '@/constants/events';
 
@@ -66,7 +66,7 @@ export default {
   },
   data: () => ({
     queries: {
-      projects: ProjectsQuery,
+      projects: GetProjectsQuery,
     },
     headers: [
       { text: 'Name', value: 'name', align: 'start' },

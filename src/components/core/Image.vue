@@ -22,7 +22,7 @@
 import PlaceholderImage from '@/assets/placeholder.png';
 
 export default {
-  name: 'Image',
+  name: 'ImageWithSpinner',
   data: () => ({
     placeholderImage: PlaceholderImage,
   }),

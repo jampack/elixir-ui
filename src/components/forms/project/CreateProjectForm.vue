@@ -65,6 +65,7 @@ export default {
     description: '',
     status: '',
     loading: false,
+    statusItems: ''
   }),
   apollo: {
     statusItems: {

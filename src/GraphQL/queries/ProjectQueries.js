@@ -1,9 +1,19 @@
 import gql from 'graphql-tag';
 import PaginatorInfoFragment from '@/GraphQL/Fragments/PaginatorFragment';
 
-// eslint-disable-next-line import/prefer-default-export
-export const ProjectsQuery = gql`
-  query GetUsersQuery( $first: Int, $page: Int, $statusOrder: SortOrder!, $updatedAtOrder: SortOrder!){
+
+export const GetProjectBySlugQuery = gql`
+  query GetProjectBySlugQuery($slug: String!){
+    projectBySlug(slug: $slug){
+      id
+      name
+      slug
+    }
+  }
+`;
+
+export const GetProjectsQuery = gql`
+  query GetProjectsQuery( $first: Int, $page: Int, $statusOrder: SortOrder!, $updatedAtOrder: SortOrder!){
     projects(
       first: $first,
       page: $page,
@@ -33,6 +43,28 @@ export const ProjectsQuery = gql`
             id
             name
           }
+        }
+      }
+    }
+  }
+  ${PaginatorInfoFragment}
+`;
+
+export const ProjectBySlugWithBoardsQuery = gql`
+  query GetProjectBySlugWithBoardsQuery( $slug: String!){
+    projectBySlug(
+      slug: $slug
+    ){
+      id
+      name
+      boards{
+        paginatorInfo{
+          ...PaginatorInfo
+        }
+        data{
+          id
+          name
+          master_board
         }
       }
     }
