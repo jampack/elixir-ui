@@ -8,13 +8,13 @@
 
       <v-row>
         <v-col cols="12">
-          <v-card shaped outlined>
-            <v-row>
+          <v-card shaped outlined style="overflow-x: scroll; overflow-y: scroll">
+            <div class="d-inline-flex" style="overflow-x: scroll">
 
               <v-col
                 v-for="column in board.columns.data"
                 :key="column.id"
-                style="min-width: 300px; height: 100%">
+                style="min-width: 400px; max-width: 450px;">
 
                 <v-card class="mx-4" flat>
                   <v-toolbar flat>
@@ -22,7 +22,7 @@
                       {{column.name}}
                     </v-toolbar-title>
                     <v-spacer />
-                    <v-btn icon>
+                    <v-btn icon v-if="column.is_primary" @click="createCardDialog = true">
                       <v-icon>
                         fas fa-plus
                       </v-icon>
@@ -48,8 +48,7 @@
                         </p>
                         <p>adjective</p>
                         <div class="text--primary">
-                          well meaning and kindly.<br>
-                          "a benevolent smile"
+                          well meaning and kindly. "a benevolent smile"
                         </div>
                       </v-card-text>
                       <v-card-actions>
@@ -64,76 +63,55 @@
                   </draggable>
                 </v-card>
               </v-col>
-
-<!--              <v-col  style="min-width: 300px; height: 100%">-->
-<!--                <draggable-->
-<!--                  :list="list2"-->
-<!--                  class="list-group full-wh"-->
-<!--                  group="people"-->
-<!--                  @change="log"-->
-<!--                  ghost-class="ghost">-->
-<!--                  <v-card-->
-<!--                    class="mx-auto"-->
-<!--                    v-for="(element, index) in list2"-->
-<!--                    :key="element.name"-->
-<!--                    max-width="344">-->
-<!--                    <v-card-text>-->
-<!--                      <div>card {{index}}</div>-->
-<!--                      <p class="display-1 text&#45;&#45;primary">-->
-<!--                        {{element.name}}-->
-<!--                      </p>-->
-<!--                      <p>adjective</p>-->
-<!--                      <div class="text&#45;&#45;primary">-->
-<!--                        well meaning and kindly.<br>-->
-<!--                        "a benevolent smile"-->
-<!--                      </div>-->
-<!--                    </v-card-text>-->
-<!--                    <v-card-actions>-->
-<!--                      <v-btn-->
-<!--                        text-->
-<!--                        color="deep-purple accent-4"-->
-<!--                      >-->
-<!--                        Learn More-->
-<!--                      </v-btn>-->
-<!--                    </v-card-actions>-->
-<!--                  </v-card>-->
-<!--                </draggable>-->
-<!--              </v-col>-->
-
-            </v-row>
+            </div>
 
           </v-card>
         </v-col>
       </v-row>
     </v-col>
+
+    <create-card-dialog
+      v-if="!queriesLoading"
+      v-model="createCardDialog"
+      :boardId="board.id"
+      :boardColumnId="columnId"
+    />
+
   </div>
 </template>
 
 <script>
 import PageTitle from '@/components/core/PageTitle.vue';
+import CreateCardDialog from '@/components/dialogs/card/CreateCardDialog.vue';
 import draggable from 'vuedraggable';
 import { GetProjectBySlugQuery } from '@/GraphQL/queries/ProjectQueries';
 import { GetProjectMasterBoard } from '@/GraphQL/queries/BoardQueries';
+
+import _ from 'lodash';
 
 export default {
   name: 'ViewProjectBoard',
   components: {
     'page-title': PageTitle,
+    'create-card-dialog': CreateCardDialog,
     draggable,
   },
   data: () => ({
     list1: [
       { name: 'John', id: 1 },
       { name: 'Joao', id: 2 },
-      { name: 'Jean', id: 3 },
-      { name: 'Gerard', id: 4 },
+      { name: 'Juan', id: 5 },
+      { name: 'Edgard', id: 6 },
+      { name: 'Johnson', id: 7 },
     ],
     list2: [
       { name: 'Juan', id: 5 },
       { name: 'Edgard', id: 6 },
       { name: 'Johnson', id: 7 },
     ],
-    project: '',
+    project: null,
+    board: { columns: { data: {} } },
+    createCardDialog: false,
   }),
   apollo: {
     project: {
@@ -161,6 +139,23 @@ export default {
       if (newVal && newVal.id) {
         this.$apollo.queries.board.skip = false;
       }
+    },
+  },
+  computed: {
+    columnId() {
+      if (_.isEmpty(this.board.columns.data)) return null;
+      const { data } = this.board.columns;
+      let columnId = null;
+
+      data.map((d) => {
+        if (d.is_primary) columnId = d.id;
+        return null;
+      });
+
+      return columnId;
+    },
+    queriesLoading() {
+      return this.$apollo.queries.board.loading || this.$apollo.queries.project.loading;
     },
   },
   methods: {

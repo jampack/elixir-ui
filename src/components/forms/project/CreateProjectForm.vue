@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { ProjectStatusQuery } from '@/GraphQL/queries/ProjectStatusQueries';
+import { ProjectStatusesQuery } from '@/GraphQL/queries/ProjectStatusQueries';
 import { CreateProjectMutation } from '@/GraphQL/mutations/ProjectMutations';
 import EmitEvent from '@/mixins/EmitEvent';
 import events from '@/constants/events';
@@ -58,18 +58,15 @@ export default {
   name: 'CreateProjectForm',
   mixins: [EmitEvent],
   data: () => ({
-    queries: {
-      projectStatuses: ProjectStatusQuery,
-    },
     name: '',
     description: '',
     status: '',
     loading: false,
-    statusItems: ''
+    statusItems: '',
   }),
   apollo: {
     statusItems: {
-      query: ProjectStatusQuery,
+      query: ProjectStatusesQuery,
       variables: {
         first: 500,
       },
