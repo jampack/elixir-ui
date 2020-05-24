@@ -7,7 +7,7 @@ export const GetBoardQuery = gql`
     board(id: $id){
       id
       name
-      master_board
+      is_master_board
       columns{
         paginatorInfo{
           ...PaginatorInfo
@@ -27,7 +27,7 @@ export const GetProjectMasterBoard = gql`
     projectMasterBoard(id: $projectId){
       id
       name
-      master_board
+      is_master_board
       columns {
         paginatorInfo{
           ...PaginatorInfo
@@ -35,6 +35,8 @@ export const GetProjectMasterBoard = gql`
         data {
           id
           name
+          is_primary
+          order
         }
       }
     }

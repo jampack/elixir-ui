@@ -64,7 +64,7 @@ export const ProjectBySlugWithBoardsQuery = gql`
         data{
           id
           name
-          master_board
+          is_master_board
         }
       }
     }

@@ -8,7 +8,6 @@
               v-model="username"
               :error-messages="errors[0]"
               label="ID"
-              name="username"
               prepend-inner-icon="fas fa-user-tie"
               outlined/>
           </ValidationProvider>
@@ -22,7 +21,6 @@
               :error-messages="errors[0]"
               id="password"
               label="Password"
-              name="password"
               prepend-inner-icon="fas fa-key"
               outlined
               @click:append="showPassword = !showPassword"/>

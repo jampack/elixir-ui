@@ -8,7 +8,6 @@
               v-model="name"
               :error-messages="errors[0]"
               label="Scheme name"
-              name="name"
               outlined/>
           </ValidationProvider>
         </v-col>
@@ -18,7 +17,6 @@
               v-model="sickLeaves"
               :error-messages="errors[0]"
               label="Sick leaves"
-              name="sick_leave"
               type="text"
               outlined/>
           </ValidationProvider>
@@ -29,7 +27,6 @@
               v-model="casualLeaves"
               :error-messages="errors[0]"
               label="Casual leaves"
-              name="casual_leave"
               outlined/>
           </ValidationProvider>
         </v-col>
@@ -39,7 +36,6 @@
               v-model="plannedLeaves"
               :error-messages="errors[0]"
               label="Planned leaves"
-              name="planned_leaves"
               outlined/>
           </ValidationProvider>
         </v-col>
@@ -49,7 +45,6 @@
               v-model="workFromHome"
               :error-messages="errors[0]"
               label="Work from home"
-              name="work_from_home"
               outlined/>
           </ValidationProvider>
         </v-col>
