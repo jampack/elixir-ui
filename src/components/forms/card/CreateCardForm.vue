@@ -1,10 +1,11 @@
 <template>
-  <ValidationObserver ref="loginForm" v-slot="{}">
+  <ValidationObserver ref="loginForm" v-slot="{ handleSubmit }">
     <v-form>
       <v-row>
         <v-col cols="12" sm="12" md="12">
-          <ValidationProvider name="username" rules="required" v-slot="{ errors }">
+          <ValidationProvider name="title" rules="required|max:1500" v-slot="{ errors }">
             <v-text-field
+              v-model="title"
               :error-messages="errors[0]"
               label="Title"
               outlined
@@ -12,8 +13,9 @@
           </ValidationProvider>
         </v-col>
         <v-col cols="12" sm="12" md="12">
-          <ValidationProvider name="description" v-slot="{ errors }">
+          <ValidationProvider name="description" rules="max:10000" v-slot="{ errors }">
             <v-textarea
+              v-model="description"
               :error-messages="errors[0]"
               label="Description"
               outlined
@@ -23,7 +25,8 @@
         <v-col cols="12" sm="12" md="12">
           <ValidationProvider name="type" rules="required" v-slot="{ errors }">
             <v-select
-              :items="cardTypes"
+              v-model="cardType"
+              :items="cardTypeItems"
               :error-messages="errors[0]"
               :menu-props="{ bottom: true, offsetY: true }"
               item-text="name"
@@ -45,9 +48,10 @@
             </v-select>
           </ValidationProvider>
         </v-col>
-        <v-col cols="12" sm="12" md="12">
-          <ValidationProvider name="task_type" rules="required" v-slot="{ errors }">
+        <v-col cols="12" sm="12" md="12" v-if="isTaskTypeVisible">
+          <ValidationProvider name="task_type_id" rules="required" v-slot="{ errors }">
             <v-autocomplete
+              v-model="taskType"
               :items="taskTypes"
               :error-messages="errors[0]"
               :menu-props="{ bottom: true, offsetY: true }"
@@ -64,7 +68,9 @@
             <v-spacer />
             <v-btn
               class="mr-2 mt-n3"
-              depressed>
+              :loading="loading"
+              depressed
+              @click="handleSubmit(submit)">
               Create
             </v-btn>
           </v-row>
@@ -77,6 +83,7 @@
 
 <script>
 import { CardTaskTypesQuery } from '@/GraphQL/queries/CardQueries';
+import { CreateCardMutation } from '@/GraphQL/mutations/CardMutations';
 
 export default {
   name: 'CreateCardForm',
@@ -91,17 +98,22 @@ export default {
     },
   },
   data: () => ({
-    cardTypes: [
+    title: '',
+    description: '',
+    cardType: 'TASK',
+    taskType: null,
+    cardTypeItems: [
       {
-        name: 'Task', value: '1', icon: 'fas fa-tasks', color: 'green',
+        name: 'Task', value: 'TASK', icon: 'fas fa-tasks', color: 'green',
       },
       {
-        name: 'Epic', value: '2', icon: 'fas fa-bolt', color: 'blue',
+        name: 'Epic', value: 'EPIC', icon: 'fas fa-bolt', color: 'blue',
       },
       {
-        name: 'Story', value: '3', icon: 'far fa-bookmark', color: 'purple',
+        name: 'Story', value: 'STORY', icon: 'far fa-bookmark', color: 'purple',
       },
     ],
+    loading: false,
   }),
   apollo: {
     taskTypes: {
@@ -112,6 +124,53 @@ export default {
         };
       },
       update: (data) => data.cardTaskTypes,
+    },
+  },
+  computed: {
+    isTaskTypeVisible() {
+      return this.cardType !== 'STORY' && this.cardType !== 'EPIC';
+    },
+  },
+  methods: {
+    submit() {
+      this.loading = true;
+      this.$apollo.mutate({
+        mutation: CreateCardMutation,
+        variables: {
+          title: this.title,
+          description: this.description,
+          type: this.cardType,
+          taskTypeId: this.taskType,
+          boardId: this.boardId,
+          boardColumnId: this.boardColumnId,
+        },
+      }).then((response) => {
+        const { createCard: { id } } = response.data;
+        if (id) {
+          this.$emit('success');
+        } else {
+          console.warn('Unexpected Result: ', response);
+        }
+      }).catch((error) => {
+        const { graphQLErrors } = error;
+        const gqlError = graphQLErrors[0];
+        if (gqlError.extensions.category === 'validation') {
+          const validationErrors = gqlError.extensions.validation;
+          Object.keys(validationErrors).forEach((key) => {
+            this.$refs.loginForm.setErrors({
+              [key]: validationErrors[key][0],
+            });
+          });
+        } else if (gqlError.extensions.category === 'authentication') {
+          this.$refs.loginForm.setErrors({
+            password: 'Password is incorrect',
+          });
+        } else {
+          console.error('Error: ', error);
+        }
+      }).finally(() => {
+        this.loading = false;
+      });
     },
   },
 };

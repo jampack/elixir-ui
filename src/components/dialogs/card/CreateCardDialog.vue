@@ -10,8 +10,9 @@
         <v-row>
           <v-col cols="12">
             <create-card-form
-              :board_id="boardId"
-              :board_column_id="boardColumnId"
+              :boardId="boardId"
+              :boardColumnId="boardColumnId"
+              v-on:success="closeDialog"
             />
           </v-col>
         </v-row>

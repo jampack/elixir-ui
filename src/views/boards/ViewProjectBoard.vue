@@ -155,7 +155,6 @@ export default {
       return columnId;
     },
     queriesLoading() {
-      console.log(this.$apollo.queries.board.loading && this.$apollo.queries.project.loading);
       return this.$apollo.queries.board.loading || this.$apollo.queries.project.loading;
     },
   },
